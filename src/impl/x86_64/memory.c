@@ -1,9 +1,10 @@
 #include "memory.h"
 
 #define PAGE_SIZE 4096
-#define MAX_PAGES 1024 * 1024  
+#define MAX_MEMORY (1024 * 1024 * 64) 
+#define MAX_PAGES (MAX_MEMORY / PAGE_SIZE)
 
-static uint8_t page_bitmap[MAX_PAGES / 8]; 
+static uint8_t page_bitmap[MAX_PAGES / 8];
 static size_t total_pages;
 
 static inline void set_bit(size_t bit) {
@@ -40,6 +41,7 @@ void* alloc_page() {
     }
     return 0; 
 }
+
 void free_page(void* addr) {
     size_t index = (size_t)addr / PAGE_SIZE;
     clear_bit(index);
