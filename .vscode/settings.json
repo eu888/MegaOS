@@ -2,5 +2,14 @@
     "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
         "clang-diagnostic-error"
     ],
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "stdint.h": "c",
+        "keyboard.h": "c",
+        "port_io.h": "c",
+        "idt.h": "c",
+        "io.h": "c",
+        "interrupts.h": "c",
+        "pit.h": "c"
+    }
 }

@@ -1,7 +1,7 @@
 #include "memory.h"
 
 #define PAGE_SIZE 4096
-#define MAX_MEMORY (1024 * 1024 * 64) 
+#define MAX_MEMORY (1024 * 1024 * 512) 
 #define MAX_PAGES (MAX_MEMORY / PAGE_SIZE)
 
 static uint8_t page_bitmap[MAX_PAGES / 8];

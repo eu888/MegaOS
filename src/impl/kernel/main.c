@@ -1,20 +1,38 @@
 #include "print.h"
 #include "memory.h"
+#include "idt.h"
+#include "pit.h"
 
 void kernel_main() {
-    init_memory_manager(64 * 1024 * 1024); 
+    print_str("Initializing memory manager...\n");
+    init_memory_manager(1024 * 1024 * 512); 
+    print_str("Memory manager initialized.\n");
+
+    print_str("Initializing heap...\n");
     init_heap();
+    print_str("Heap initialized.\n");
 
-    print_str("Reserving heap...\n");
-
-    void* ptr = kmalloc(128);
-    if (ptr) {
-        print_str("Allocated 128 bytes.\n");
+    void* page = alloc_page();
+    if (!page) {
+        print_set_color(PRINT_COLOR_RED, PRINT_COLOR_BLACK);
+        print_str("Failed to allocate page\n");
+        return;
     }
+    print_str("Page allocated successfully\n");
 
+    void* ptr = kmalloc(512 * 1024);
+    if (!ptr) {
+        print_set_color(PRINT_COLOR_RED, PRINT_COLOR_BLACK);
+        print_str("Failed to allocate 512 kilobytes from heap.\n");
+        return;
+    }
+    print_str("Allocated 512 kilobytes successfully.\n");
+
+    print_str("Checking heap integrity...\n");
     check_heap_integrity();
 
-    kfree(ptr);
+    init_idt();        
+    init_pit(100);     
 
-    check_heap_integrity();
+    print_str("Kernel setup complete.\n");
 }
