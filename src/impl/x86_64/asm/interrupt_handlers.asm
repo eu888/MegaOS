@@ -1,4 +1,6 @@
 global interrupt_handler_0
+global interrupt_handler_1
+extern handle_keyboard_interrupt
 
 section .text
 align 16
@@ -38,4 +40,8 @@ interrupt_handler_0:
     pop rcx
     pop rax
 
+    iretq
+
+interrupt_handler_1:
+    call handle_keyboard_interrupt
     iretq

@@ -23,5 +23,6 @@ struct idt_ptr {
 void set_idt_gate(int vector, uint64_t handler);
 void load_idt();
 void init_idt();
+void init_pic();
 
 #endif

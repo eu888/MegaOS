@@ -2,6 +2,8 @@
 #include "memory.h"
 #include "idt.h"
 #include "pit.h"
+#include "interrupts.h"
+#include "terminal.h"
 
 void kernel_main() {
     print_str("Initializing memory manager...\n");
@@ -31,8 +33,15 @@ void kernel_main() {
     print_str("Checking heap integrity...\n");
     check_heap_integrity();
 
-    init_idt();        
-    init_pit(100);     
+    init_idt();         
+    init_interrupts();  
+    init_pit(100);    
 
+    clear_screen();   
     print_str("Kernel setup complete.\n");
+    print_str(">");  
+
+    while (1) {
+        __asm__ volatile ("hlt"); 
+    }
 }

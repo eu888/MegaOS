@@ -1,7 +1,8 @@
 #include "print.h"
+#include "terminal.h"
 
-const static size_t NUM_COLS = 80;
-const static size_t NUM_ROWS = 25;
+const static size_t NUM_COLS = VGA_WIDTH;
+const static size_t NUM_ROWS = VGA_HEIGHT;
 
 struct Char {
     uint8_t character;
@@ -28,6 +29,8 @@ void print_clear() {
     for (size_t i = 0; i < NUM_ROWS; i++) {
         clear_row(i);
     }
+    row = 0;
+    col = 0;
 }
 
 void print_newline() {
@@ -51,6 +54,17 @@ void print_newline() {
 void print_char(char character) {
     if (character == '\n') {
         print_newline();
+        return;
+    }
+
+    if (character == '\b') {
+        if (col > 0) {
+            col--;
+            buffer[col + NUM_COLS * row] = (struct Char) {
+                character: ' ',
+                color: color,
+            };
+        }
         return;
     }
 

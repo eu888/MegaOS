@@ -10,6 +10,9 @@
         "idt.h": "c",
         "io.h": "c",
         "interrupts.h": "c",
-        "pit.h": "c"
+        "pit.h": "c",
+        "string.h": "c",
+        "print.h": "c",
+        "terminal.h": "c"
     }
 }
