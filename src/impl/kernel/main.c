@@ -39,7 +39,8 @@ void kernel_main() {
 
     clear_screen();   
     print_str("Kernel setup complete.\n");
-    print_str(">");  
+    __asm__ volatile("int $35");
+    start_simbol();  
 
     while (1) {
         __asm__ volatile ("hlt"); 

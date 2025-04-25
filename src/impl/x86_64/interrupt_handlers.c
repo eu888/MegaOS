@@ -48,6 +48,16 @@ void handle_keyboard_interrupt() {
     send_eoi(1);  
 }
 
+void handle_irq2_interrupt(){
+    print_str("IRQ2 seted up.\n");
+    send_eoi(2);
+}
+
+void handle_com2_com4_interrupt(){
+    print_str("IRQ3 seted up.\n");
+    send_eoi(3);
+}
+
 char scancode_to_ascii(uint8_t scancode) {
     static const char ascii_table[128] = {
         0,  27, '1','2','3','4','5','6','7','8','9','0','-','=','\b', // 0x00 - 0x0E

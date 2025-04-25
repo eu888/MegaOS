@@ -13,6 +13,7 @@
         "pit.h": "c",
         "string.h": "c",
         "print.h": "c",
-        "terminal.h": "c"
+        "terminal.h": "c",
+        "stddef.h": "c"
     }
 }

@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "string.h"
+#include <stddef.h>
+#include "strings.h"
 #include "terminal.h" 
 #include "io.h"
 #include "print.h"
@@ -9,8 +10,9 @@ uint16_t* video_memory = (uint16_t*)0xB8000;
 
 int cursor_x = 0;
 int cursor_y = 0;
-extern color;
+extern uint8_t color;
 char command_buffer[MAX_CMD_LEN];
+const char* buffer_echo = "";
 int command_length = 0; 
 
 void update_cursor() {
@@ -45,13 +47,29 @@ void handle_command(const char* cmd) {
     if (strcmp(cmd, "clear") == 0) {
         clear_screen();
     } else if (strcmp(cmd, "help") == 0) {
-        print_str("Available commands: help, clear, info\n");
+        print_str("Available commands: help, clear, info, echo.\n");
+        print_str("For more info tipe info command.\n");
+    } else if (strcmp(cmd, "help clear") == 0){
+        print_str("Clears the screen.\n");
+    } else if (strcmp(cmd, "help info") == 0){
+        print_str("Displays info about OS.\n");
+    } else if (strcmp(cmd, "help echo") == 0){
+        print_str("Writes back the mesage after command.\n");
+        print_str("Ex:> echo hello\n");
+        print_str("hello\n");
     } else if (strcmp(cmd, "info") == 0) {
         print_str("MegaOS v0.4\n");
         print_str("64-bit, stil in progres.\n");
+    } else if (strncmp(cmd, "echo", 4) == 0){
+        buffer_echo = cmd;
+        buffer_echo += 5;
+        print_str(buffer_echo);
+        print_str("\n");
+        buffer_echo = "";
+    } else if (strncmp(cmd, "\n", 1) == 0){
+        start_simbol();
     } else {
         print_str("Unknown command: ");
-        print_str(cmd);
         print_str("\n");
     }
 }
@@ -62,7 +80,7 @@ void process_key(char key) {
         print_char('\n'); 
         handle_command(command_buffer);
         command_length = 0;
-        print_str("> "); 
+        start_simbol();
     } else if (key == '\b') {
         if (command_length > 0) {
             command_length--;
@@ -74,5 +92,9 @@ void process_key(char key) {
             print_char(key); 
         }
     }
+}
+
+void start_simbol(){
+    print_str("> ");
 }
 

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdint.h>
+#include <stddef.h>
+
 #define VGA_WIDTH 80
 #define VGA_HEIGHT 25
 #define MAX_CMD_LEN 128
@@ -10,3 +13,4 @@ void clear_screen();
 void handle_command(const char* cmd);
 void process_key(char key);
 char scancode_to_ascii(uint8_t scancode);
+void start_simbol();
