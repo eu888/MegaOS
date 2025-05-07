@@ -48,7 +48,7 @@ void handle_command(const char* cmd) {
         clear_screen();
     } else if (strcmp(cmd, "help") == 0) {
         print_str("Available commands: help, clear, info, echo.\n");
-        print_str("For more info tipe info command.\n");
+        print_str("For more info type help command.\n");
     } else if (strcmp(cmd, "help clear") == 0){
         print_str("Clears the screen.\n");
     } else if (strcmp(cmd, "help info") == 0){
@@ -58,18 +58,25 @@ void handle_command(const char* cmd) {
         print_str("Ex:> echo hello\n");
         print_str("hello\n");
     } else if (strcmp(cmd, "info") == 0) {
-        print_str("MegaOS v0.4\n");
+        print_str("MegaOS v0.4.1\n");
         print_str("64-bit, stil in progres.\n");
     } else if (strncmp(cmd, "echo", 4) == 0){
-        buffer_echo = cmd;
-        buffer_echo += 5;
+        buffer_echo = cmd + 5;
         print_str(buffer_echo);
         print_str("\n");
         buffer_echo = "";
     } else if (strncmp(cmd, "\n", 1) == 0){
         start_simbol();
+    }else if(strncmp(cmd, "int", 3)){ 
+        buffer_echo = cmd + 4;
+        if(strcmp(buffer_echo, "0x35")){
+            __asm__ volatile("int $35");
+        } else if(strcmp(buffer_echo, "0x32")){
+            __asm__ volatile("int $32");
+        }
     } else {
         print_str("Unknown command: ");
+        print_str(cmd);
         print_str("\n");
     }
 }
