@@ -1,5 +1,6 @@
 #include "print.h"
 #include "terminal.h"
+#include "io.h"
 
 const static size_t NUM_COLS = VGA_WIDTH;
 const static size_t NUM_ROWS = VGA_HEIGHT;
@@ -104,4 +105,40 @@ void print_hex(uint64_t value) {
 
 void print_set_color(uint8_t foreground, uint8_t background) {
     color = foreground + (background << 4);
+}
+
+void wait_for_keypress() {
+    uint8_t status;
+    do {
+        status = inb(0x64); // PS/2 status port
+    } while (!(status & 1)); // wait until output buffer full
+    (void) inb(0x60); // read scancode to clear the buffer
+}
+
+void sleep(uint64_t count) {
+    for (volatile uint64_t i = 0; i < count; i++) {
+        __asm__ volatile("nop");
+    }
+}
+
+void hexdump(uint8_t* buffer, size_t length) {
+    for (size_t i = 0; i < length; i++) {
+        uint8_t byte = buffer[i];
+        char hex[3] = {
+            "0123456789ABCDEF"[byte >> 4],
+            "0123456789ABCDEF"[byte & 0xF],
+            '\0'
+        };
+        print_str(hex);
+        print_char(' ');
+
+        if ((i + 1) % 16 == 0) {
+            print_char('\n');
+        }
+
+        if ((i + 1) % 256 == 0) {
+            print_str("Pausing...\n");
+            sleep(100000000);  // Adjust this count as needed
+        }
+    }
 }

@@ -27,3 +27,6 @@ void print_char(char character);
 void print_str(char* str);
 void print_set_color(uint8_t foreground, uint8_t background);
 void print_hex(uint64_t value);
+void hexdump(uint8_t* buffer, size_t length);
+void wait_for_keypress();
+void sleep(uint64_t count);

@@ -67,13 +67,6 @@ void handle_command(const char* cmd) {
         buffer_echo = "";
     } else if (strncmp(cmd, "\n", 1) == 0){
         start_simbol();
-    }else if(strncmp(cmd, "int", 3)){ 
-        buffer_echo = cmd + 4;
-        if(strcmp(buffer_echo, "0x35")){
-            __asm__ volatile("int $35");
-        } else if(strcmp(buffer_echo, "0x32")){
-            __asm__ volatile("int $32");
-        }
     } else {
         print_str("Unknown command: ");
         print_str(cmd);
