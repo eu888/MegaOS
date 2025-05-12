@@ -38,7 +38,7 @@ After completing step 4, you can build the project with the following command:
     ```bash
     make build-x86_64
     ```
-    There is already a build with the version you downloaded 
+    There is already a build with the version you downloaded.
 
 ## Usage
 
