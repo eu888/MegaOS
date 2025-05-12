@@ -1,0 +1,87 @@
+# MegaOS Overview
+
+MegaOS is an operating system designed from scratch.
+
+## Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/eu888/MegaOS.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd MegaOS
+    ```
+3. Install dependencies:
+    ```bash
+    docker build buildenv -t myos-buildenv
+    ```
+
+4. Run the following command based on your operating system:
+
+   - **Linux/Mac**:
+     ```bash
+     docker run --rm -it -v "$(pwd)/root/env:/env" myos-buildenv
+     ```
+
+   - **Windows (PowerShell)**:
+     ```powershell
+     docker run --rm -it -v "${PWD}/root/env:/env" myos-buildenv
+     ```
+
+Note: Use `${PWD}` for PowerShell on Windows and `$(pwd)` for Linux/Mac.
+
+After completing step 4, you can build the project with the following command:
+
+5. Compile
+    After completing step 4, you can build the project with the following command:
+    ```bash
+    make build-x86_64
+    ```
+    There is already a build with the version you downloaded 
+
+## Usage
+
+After compilation, you can run the `kernel.iso` found in `dist\x86_64` in VirtualBox:
+1. Open VirtualBox and create a new virtual machine.
+2. Select "Other" as the operating system type.
+3. Attach the `kernel.iso` file as the bootable disk.
+4. Start the virtual machine.
+
+## Features
+
+There are many features, here are arranged by the library they came from:
+
+1. `print.h`:
+    - **void print_clear();**
+        - Clears the screen or terminal output.
+    - **void print_char(char character);**
+        - Prints a single character to the screen or terminal.
+    - **void print_str(char\* str);**
+        - Prints a null-terminated string to the screen or terminal.
+    - **void print_set_color(uint8_t foreground, uint8_t background);**
+        - Sets the foreground and background colors for subsequent text output.
+        - **Parameters:**
+            - `foreground`: Color code for the text.
+            - `background`: Color code for the background.
+    - **void print_hex(uint64_t value);**
+        - Prints a 64-bit hexadecimal value.
+    - **void hexdump(uint8_t\* buffer, size_t length);**
+        - Prints a hex dump of the given buffer.
+        - **Parameters:**
+            - `buffer`: Pointer to the data buffer.
+            - `length`: Length of the buffer.
+    - **void wait_for_keypress();**
+        - Waits for a key press from the user.
+    - **void sleep(uint64_t count);**
+        - Pauses execution for a specified duration.
+        - **Parameter:**
+            - `count`: Duration to sleep.
+
+## Contributing
+
+Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) to get started.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
