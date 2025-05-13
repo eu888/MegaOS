@@ -79,6 +79,37 @@ There are many features, here are arranged by the library they came from:
         Pauses execution for a specified duration.
         - **Parameter:**
             - `count`: Duration to sleep.
+    
+2. `memory.h`:
+    - **void init_memory_manager(size_t mem_size);**  
+        Initializes the memory manager with the given memory size.
+        - **Parameter:**
+            - `mem_size`: Total size of memory to manage.
+
+    - **void* alloc_page();**  
+        Allocates a single memory page and returns a pointer to it.
+
+    - **void free_page(void* addr);**  
+        Frees a previously allocated memory page.
+        - **Parameter:**
+            - `addr`: Pointer to the page to free.
+
+    - **void init_heap();**  
+        Initializes the kernel heap for dynamic memory allocation.
+
+    - **void* kmalloc(size_t size);**  
+        Allocates a block of memory of the specified size from the kernel heap.
+        - **Parameter:**
+            - `size`: Number of bytes to allocate.
+        - **Returns:** Pointer to the allocated memory.
+
+    - **void kfree(void* ptr);**  
+        Frees a previously allocated block of memory from the kernel heap.
+        - **Parameter:**
+            - `ptr`: Pointer to the memory block to free.
+
+    - **void check_heap_integrity();**  
+        Checks the integrity of the kernel heap for consistency and errors.
 
 ## Contributing
 

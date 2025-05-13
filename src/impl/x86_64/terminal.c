@@ -61,10 +61,8 @@ void handle_command(const char* cmd) {
         print_str("MegaOS v0.4.1\n");
         print_str("64-bit, stil in progres.\n");
     } else if (strncmp(cmd, "echo", 4) == 0){
-        buffer_echo = cmd + 5;
-        print_str(buffer_echo);
+        print_str(cmd + 5);
         print_str("\n");
-        buffer_echo = "";
     } else if (strncmp(cmd, "\n", 1) == 0){
         start_simbol();
     } else {
