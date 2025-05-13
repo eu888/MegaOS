@@ -86,10 +86,10 @@ There are many features, here are arranged by the library they came from:
         - **Parameter:**
             - `mem_size`: Total size of memory to manage.
 
-    - **void* alloc_page();**  
+    - **void\* alloc_page();**  
         Allocates a single memory page and returns a pointer to it.
 
-    - **void free_page(void* addr);**  
+    - **void free_page(void\* addr);**  
         Frees a previously allocated memory page.
         - **Parameter:**
             - `addr`: Pointer to the page to free.
@@ -97,13 +97,13 @@ There are many features, here are arranged by the library they came from:
     - **void init_heap();**  
         Initializes the kernel heap for dynamic memory allocation.
 
-    - **void* kmalloc(size_t size);**  
+    - **void\* kmalloc(size_t size);**  
         Allocates a block of memory of the specified size from the kernel heap.
         - **Parameter:**
             - `size`: Number of bytes to allocate.
         - **Returns:** Pointer to the allocated memory.
 
-    - **void kfree(void* ptr);**  
+    - **void kfree(void\* ptr);**  
         Frees a previously allocated block of memory from the kernel heap.
         - **Parameter:**
             - `ptr`: Pointer to the memory block to free.
