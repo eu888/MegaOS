@@ -34,6 +34,6 @@ If you encounter any issues or have suggestions for improvements, please open an
 
 ## Contact
 
-If you have any questions or need further assistance, feel free to reach out to our team at [contact@megaos.com](mailto:contact@megaos.com).
+If you have any questions or need further assistance, feel free to reach out to our team at [andrianbaciu146@gmail.com](mailto:andrianbaciu146@gmail.com).
 
 We appreciate your contributions and look forward to working with you!
