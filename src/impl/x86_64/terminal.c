@@ -58,7 +58,7 @@ void handle_command(const char* cmd) {
         print_str("Ex:> echo hello\n");
         print_str("hello\n");
     } else if (strcmp(cmd, "info") == 0) {
-        print_str("MegaOS v0.4.1\n");
+        print_str("MegaOS v0.5.2\n");
         print_str("64-bit, stil in progres.\n");
     } else if (strncmp(cmd, "echo", 4) == 0){
         print_str(cmd + 5);

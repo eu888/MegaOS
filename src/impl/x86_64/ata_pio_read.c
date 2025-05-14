@@ -14,7 +14,6 @@ void ata_pio_read28(uint32_t lba, uint8_t sector_count, void* buf) {
     outb(ATA_PRIMARY_IO + 3, (uint8_t) lba);
     outb(ATA_PRIMARY_IO + 4, (uint8_t) lba >> 8);
     outb(ATA_PRIMARY_IO + 5, (uint8_t) lba >> 16);
-
     outb(ATA_PRIMARY_IO + 6, 0xE0 | ((lba >> 24) & 0x0F));
     outb(ATA_PRIMARY_IO + 7, ATA_CMD_READ_PIO);
 

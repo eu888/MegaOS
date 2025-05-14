@@ -1,2 +1,10 @@
-*.bin
 *.o
+*.bin
+*.iso
+/build/
+/dist/
+*~
+*.swp
+*.swo
+*.tmp
+.vscode/

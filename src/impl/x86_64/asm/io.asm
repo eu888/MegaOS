@@ -9,7 +9,6 @@ outb:
     mov al, sil
     out dx, al
     ret
-
 inb:
     mov dx, di
     in al, dx

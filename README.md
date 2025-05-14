@@ -111,6 +111,28 @@ There are many features, here are arranged by the library they came from:
     - **void check_heap_integrity();**  
         Checks the integrity of the kernel heap for consistency and errors.
 
+3. `strings.h`: Includes some functions for `string.h`
+
+4. `io.h`:
+    - **void outb(uint16_t port, uint8_t val);**
+        The out instruction, only one byte.
+        - **Parameter:**
+            - `port`: The I/O port.
+            - `val`: The value to be outputed in the I/O port port.
+    - **uint8_t inb(uint16_t port);**
+        The in instruction, only one byte.
+        - **Parameter:**
+            - `port`: The I/O port wich will get the value.
+    - **void outw(uint16_t port, uint8_t val);**
+        The out instruction, 16 bytes.
+        - **Parameter:**
+            - `port`: The I/O port.
+            - `val`: The value to be outputed in the I/O port port.
+    - **uint8_t inb(uint16_t port);**
+        The in instruction 16 bytes.
+        - **Parameter:**
+            - `port`: The I/O port wich will get the value.
+
 ## Contributing
 
 Contributions are welcome! Please follow the [contribution guidelines](CONTRIBUTING.md) to get started.
