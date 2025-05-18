@@ -19,6 +19,8 @@ To get started with contributing to MegaOS, follow these steps:
 7. Push your changes to your forked repository.
 8. Submit a pull request to the main repository.
 
+All this can be found in the [Pull Request Template](pull_request_template.md)
+
 ## Contribution Guidelines
 
 - Follow the existing code style and conventions.

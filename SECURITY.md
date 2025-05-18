@@ -14,7 +14,7 @@ For now it is in beta:
 <p>We take security issues seriously and appreciate your efforts to responsibly disclose vulnerabilities. If you discover a security vulnerability in this project, please follow the steps below:</p>
 
 1. **Contact Us:**
-  - **Email:** andrianbaciu146@gmail.com
+  - **Email:** [andrianbaciu146@gmail.com](mailto:andrianbaciu146@gmail.com)
   - Please include the following details in your report:
     - A description of the vulnerability.
     - Steps to reproduce the issue.

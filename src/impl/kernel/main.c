@@ -43,10 +43,7 @@ void kernel_main() {
     init_interrupts();  
     init_pit(100);    
 
-    clear_screen();
-    print_str("Printing LBA...\n");
-    hexdump(exFATBuffer, 256); 
-    print_str("\n");  
+    clear_screen();  
     print_str("Kernel setup complete.\n");
     start_simbol();  
 
