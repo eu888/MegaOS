@@ -16,6 +16,8 @@
         "terminal.h": "c",
         "stddef.h": "c",
         "strings.h": "c",
-        "ata_pio_read.h": "c"
+        "ata_pio_read.h": "c",
+        "memory.h": "c",
+        "file.h": "c"
     }
 }

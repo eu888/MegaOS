@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 #define VGA_WIDTH 80
-#define VGA_HEIGHT 25
+#define VGA_HEIGHT 50
 #define MAX_CMD_LEN 128
 
 void update_cursor();
