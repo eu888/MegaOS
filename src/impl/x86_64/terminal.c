@@ -12,7 +12,6 @@ int cursor_x = 0;
 int cursor_y = 0;
 extern uint8_t color;
 char command_buffer[MAX_CMD_LEN];
-const char* buffer_echo = "";
 int command_length = 0; 
 
 void update_cursor() {
@@ -47,24 +46,30 @@ void handle_command(const char* cmd) {
     if (strcmp(cmd, "clear") == 0) {
         clear_screen();
     } else if (strcmp(cmd, "help") == 0) {
-        print_str("Available commands: help, clear, info, echo.\n");
-        print_str("For more info type help command.\n");
+        print_str("Available commands:\n");
+        print_str("  help         - Show this help message\n");
+        print_str("  clear        - Clear the screen\n");
+        print_str("  info         - Display OS information\n");
+        print_str("  echo <text>  - Print <text> back to the terminal\n");
+        print_str("Type 'help <command>' for more details.\n");
     } else if (strcmp(cmd, "help clear") == 0){
-        print_str("Clears the screen.\n");
+        print_str("clear: Clears the screen and resets the prompt.\n");
     } else if (strcmp(cmd, "help info") == 0){
-        print_str("Displays info about OS.\n");
+        print_str("info: Displays information about MegaOS.\n");
     } else if (strcmp(cmd, "help echo") == 0){
-        print_str("Writes back the mesage after command.\n");
-        print_str("Ex:> echo hello\n");
-        print_str("hello\n");
+        print_str("echo <text>: Writes back the message after the command.\n");
+        print_str("Example: > echo hello\n");
+        print_str("         hello\n");
     } else if (strcmp(cmd, "info") == 0) {
         print_str("MegaOS v0.5.2\n");
-        print_str("64-bit, stil in progres.\n");
+        print_str("64-bit, still in progress.\n");
     } else if (strncmp(cmd, "echo", 4) == 0){
-        print_str(cmd + 5);
+        if (cmd[4] == ' ' && cmd[5] != '\0'){
+            print_str(cmd + 5);
+        }
         print_str("\n");
-    } else if (strncmp(cmd, "\n", 1) == 0){
-        start_simbol();
+    } else if (strcmp(cmd, "\n") == 0 || cmd[0] == '\0') {
+        // Do nothing for empty input
     } else {
         print_str("Unknown command: ");
         print_str(cmd);
@@ -78,7 +83,7 @@ void process_key(char key) {
         print_char('\n'); 
         handle_command(command_buffer);
         command_length = 0;
-        start_simbol();
+        start_symbol();
     } else if (key == '\b') {
         if (command_length > 0) {
             command_length--;
@@ -92,7 +97,7 @@ void process_key(char key) {
     }
 }
 
-void start_simbol(){
+void start_symbol(){
     print_str("> ");
 }
 

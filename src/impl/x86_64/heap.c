@@ -37,24 +37,32 @@ void init_heap() {
 }
 
 void* kmalloc(size_t size) {
-    if (size == 0) return NULL;
-
-    block_header_t* current = heap_head;
-    while (current) {
+     if (size == 0) return NULL;
+     block_header_t* current = heap_head;
+     while (current){
         if (current->free && current->size >= size) {
+            if (current->size > size + sizeof(block_header_t) + GUARD_SIZE) {
+                block_header_t* new_block = (block_header_t*)((uintptr_t)current + sizeof(block_header_t) + size + GUARD_SIZE);
+                new_block->size = current->size - size - sizeof(block_header_t) - GUARD_SIZE;
+                new_block->free = 1;
+                new_block->next = current->next;
+                new_block->guard_front = GUARD_PATTERN;
+
+                uintptr_t* guard_back = (uintptr_t*)((uintptr_t)new_block + sizeof(block_header_t) + new_block->size);
+                *guard_back = GUARD_PATTERN;
+
+                current->size = size;
+                current->next = new_block;
+            }
             current->free = 0;
-
             current->guard_front = GUARD_PATTERN;
-            uintptr_t* guard_back = (uintptr_t*)((uintptr_t)current + sizeof(block_header_t) + size);
+            uintptr_t* guard_back = (uintptr_t*)((uintptr_t)current + sizeof(block_header_t) + current->size); 
             *guard_back = GUARD_PATTERN;
-
             return (void*)((uintptr_t)current + sizeof(block_header_t));
         }
-
         current = current->next;
-    }
-
-    return NULL; 
+     }
+    return NULL;
 }
 
 void kfree(void* ptr) {

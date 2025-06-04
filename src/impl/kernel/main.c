@@ -57,7 +57,7 @@ void kernel_main() {
     init_interrupts();  
     init_pit(100);      
     print_str("Kernel setup complete.\n");
-    start_simbol();  
+    start_symbol();  
 
     while (1) {
         __asm__ volatile ("hlt"); 

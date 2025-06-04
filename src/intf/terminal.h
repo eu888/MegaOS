@@ -13,4 +13,4 @@ void clear_screen();
 void handle_command(const char* cmd);
 void process_key(char key);
 char scancode_to_ascii(uint8_t scancode);
-void start_simbol();
+void start_symbol();

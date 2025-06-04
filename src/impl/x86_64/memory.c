@@ -42,7 +42,26 @@ void* alloc_page() {
     return 0; 
 }
 
+void* alloc_pages(size_t count) {
+    for(size_t i = 0; i < total_pages - count; i++) {
+        int found = 1;
+        for(size_t j = 0; j < count; j++) {
+            if(test_bit(i + j)) {
+                found = 0;
+                break;
+            }
+        }
+        if(found){
+            for(size_t j = 0; j < count; j++) set_bit(i + j);
+            return (void*)(i * PAGE_SIZE);
+        }
+    }
+    return NULL;
+}
+
 void free_page(void* addr) {
     size_t index = (size_t)addr / PAGE_SIZE;
-    clear_bit(index);
+    if (index < total_pages) {
+        clear_bit(index);
+    }
 }
