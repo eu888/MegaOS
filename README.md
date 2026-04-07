@@ -1,5 +1,9 @@
 # MegaOS Overview
 
+[![Docker Image CI](https://github.com/Dev-Team-Zero/MegaOS/actions/workflows/docker-image.yml/badge.svg)](https://github.com/Dev-Team-Zero/MegaOS/actions/workflows/docker-image.yml)
+
+[![CodeQL Advanced](https://github.com/Dev-Team-Zero/MegaOS/actions/workflows/codeql.yml/badge.svg)](https://github.com/Dev-Team-Zero/MegaOS/actions/workflows/codeql.yml)
+
 MegaOS is an operating system designed from scratch.
 
 ## Note
