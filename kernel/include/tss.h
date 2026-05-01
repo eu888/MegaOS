@@ -33,7 +33,7 @@ typedef struct tss_entry {
 	uint32_t ldt;
 	uint16_t trap;
 	uint16_t iomap_base;
-} tss_entry_t __attribute__((packed));
+} __attribute__((packed)) tss_entry_t;
 
 void write_tss(gdt_entry_bits* g);
 void set_kernel_stack(uint32_t stack);

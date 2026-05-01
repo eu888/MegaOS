@@ -1,11 +1,11 @@
-#pragma once
+
 
 #include <stdint.h>
 #include <stddef.h>
 #include "vga.h"
 #include "string.h"
 
-struct gdt_entry_bits{
+typedef struct gdt_entry_bits{
     uint16_t limit_low;
     uint32_t base_low : 24;
     uint8_t accessed : 1;
@@ -21,4 +21,4 @@ struct gdt_entry_bits{
     uint8_t big : 1;
     uint8_t granularity : 1;
     uint8_t base_high;
-} __attribute__((packed));
+} __attribute__((packed)) gdt_entry_bits_t;
