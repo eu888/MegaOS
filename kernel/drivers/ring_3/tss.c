@@ -4,7 +4,7 @@ tss_entry_t tss_entry;
 
 extern void flush_tss(void);
 
-void write_tss(gdt_entry_bits* g){
+void write_tss(gdt_entry_bits_t* g){
     uint32_t base = (uint32_t) &tss_entry;
     uint32_t limit = sizeof(tss_entry);
 

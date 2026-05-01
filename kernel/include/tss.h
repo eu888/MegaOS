@@ -1,4 +1,4 @@
-#pragma once
+
 
 #include <stdint.h>
 #include <stddef.h>
@@ -35,5 +35,5 @@ typedef struct tss_entry {
 	uint16_t iomap_base;
 } __attribute__((packed)) tss_entry_t;
 
-void write_tss(gdt_entry_bits* g);
+void write_tss(gdt_entry_bits_t* g);
 void set_kernel_stack(uint32_t stack);
