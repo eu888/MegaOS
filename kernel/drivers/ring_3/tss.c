@@ -21,13 +21,13 @@ void write_tss(gdt_entry_bits_t* g){
 	g->available = 0; 
 	g->long_mode = 0;
 	g->big = 0;
-	g->gran = 0; 
+	g->granularity = 0; 
 	g->base_high = (base & (0xff << 24)) >> 24;
 
 	memset(&tss_entry, 0, sizeof tss_entry);
 
-	tss_entry.ss0  = REPLACE_KERNEL_DATA_SEGMENT;  
-	tss_entry.esp0 = REPLACE_KERNEL_STACK_ADDRESS; 
+	tss_entry.ss0 = 0x10; 
+	tss_entry.esp0 = 0; 
 }
 
 void set_kernel_stack(uint32_t stack){ 

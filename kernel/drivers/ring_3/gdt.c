@@ -18,7 +18,7 @@ ring3_code->limit_high = 0xF;
 ring3_code->available = 1;
 ring3_code->long_mode = 0;
 ring3_code->big = 1;
-ring3_code->gran = 1;
+ring3_code->granularity = 1;
 ring3_code->base_high = 0;
 
 *ring3_data = *ring3_code; 
