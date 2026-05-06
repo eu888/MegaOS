@@ -1,18 +1,18 @@
 global jump_usermode
 extern test_user_function
-jump_usermode:
-;enable system call extensions that enables sysret and syscall
-	mov rcx, 0xc0000082
-	wrmsr
-	mov rcx, 0xc0000080
-	rdmsr
-	or eax, 1
-	wrmsr
-	mov rcx, 0xc0000081
-	rdmsr
-	mov edx, 0x00180008
-	wrmsr
 
-	mov ecx, test_user_function ; to be loaded into RIP
-	mov r11, 0x202 ; to be loaded into EFLAGS
-	sysretq ;use "o64 sysret" if you assemble with NASM
+section .text
+
+jump_usermode:          ; rdi = user_stack_top
+    mov ax, 0x23        ; ring 3 data selector
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+
+    push 0x23               ; SS
+    push rdi                ; RSP — user stack top
+    push 0x202              ; RFLAGS — IF set
+    push 0x1B               ; CS — ring 3 code selector
+    push test_user_function ; RIP
+    iretq
