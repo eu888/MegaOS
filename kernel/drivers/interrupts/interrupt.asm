@@ -112,6 +112,7 @@ exception_stub_14:
     mov rdi, 0xE
     pop rsi
     call exception_handler
+    hlt
 
 exception_stub_generic:
     push 0 

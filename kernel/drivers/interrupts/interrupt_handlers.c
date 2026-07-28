@@ -81,6 +81,21 @@ void exception_handler(uint8_t vector, uint64_t error_code){
     terminal_write_hex(vector);
     terminal_write_string("\nError code: ");
     terminal_write_hex(error_code);
-    terminal_write_string("\nSystem halted.");
-    __asm__ volatile("cli; hlt");
+    uint64_t cr2;
+    __asm__ volatile("mov %%cr2, %0" : "=r"(cr2));
+
+    terminal_write_string("\nCR2: ");
+    terminal_write_hex(cr2);
+    uint64_t rip;
+    __asm__ volatile("lea (%%rip), %0" : "=r"(rip));
+    terminal_write_string("\nRIP: ");
+    terminal_write_hex(rip);
+    uint64_t cs;
+    __asm__ volatile("mov %%cs, %0" : "=r"(cs));
+    terminal_write_string("\nCS: ");
+    terminal_write_hex(cs);
+    for(;;);
+    // terminal_write_string("\nSystem halted.");
+    // __asm__ volatile("cli");
+    // __asm__ volatile("hlt");
 }

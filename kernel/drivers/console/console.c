@@ -116,6 +116,8 @@ void console_command_handler(const char* command){
         
         dispatch_interrupt(int_nr);
 
+    } else if (strncmp(command, "help", 4)){
+        terminal_write_string("Avalible commands:\n");
     }
     else{
         terminal_write_string("Command ");

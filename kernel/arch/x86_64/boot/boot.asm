@@ -49,12 +49,12 @@ _start:
     xor edx, edx
 
     mov eax, l3
-    or eax, 0x03       
+    or eax, 0x07       ; present, rw, user
     mov [l4], eax
     mov dword [l4 + 4], edx
 
     mov eax, l2
-    or eax, 0x03
+    or eax, 0x07       ; present, rw, user
     mov [l3], eax
     mov dword [l3 + 4], edx
 
@@ -62,7 +62,7 @@ _start:
     .pd_loop:
         mov eax, ecx
         shl eax, 21         
-        or eax, 0x83        
+        or eax, 0x87        
         mov [l2 + ecx*8], eax
         mov dword [l2 + ecx*8 + 4], edx
         inc ecx

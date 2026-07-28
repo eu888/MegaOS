@@ -9,63 +9,33 @@ gdt_entry_bits_t* ring3_data = &gdt[4];
 
 extern void flush_tss(void);
 
+void gdt_set_entry(gdt_entry_bits_t *entry, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags){
+    entry->limit_low  = limit & 0xFFFF;
+
+    entry->base_low = base & 0xFFFF;
+    entry->base_mid = (base >> 16) & 0xFF;
+    entry->base_high = (base >> 24) & 0xFF;
+
+    entry->access = access;
+
+    entry->granularity = ((limit >> 16) & 0x0F) | (flags & 0xF0);
+}
+
 void init_gdt(void){
     memset(gdt, 0, sizeof gdt);
 
     // Kernel code segment (ring 0)
-    gdt[1].limit_low = 0xFFFF;
-    gdt[1].base_low = 0;
-    gdt[1].accessed = 0;
-    gdt[1].read_write = 1;
-    gdt[1].conforming_expand_down = 0;
-    gdt[1].code = 1;
-    gdt[1].code_data_segment = 1;
-    gdt[1].DPL = 0;
-    gdt[1].present = 1;
-    gdt[1].limit_high = 0xF;
-    gdt[1].available = 0;
-    gdt[1].long_mode = 1;  
-    gdt[1].big = 0;
-    gdt[1].granularity = 1;
-    gdt[1].base_high = 0;
+    gdt_set_entry(&gdt[1], 0, 0xFFFFF, 0x9A, 0xA0);
 
     // Kernel data segment (ring 0)
-    gdt[2].limit_low = 0xFFFF;
-    gdt[2].base_low = 0;
-    gdt[2].accessed = 0;
-    gdt[2].read_write = 1;
-    gdt[2].conforming_expand_down = 0;
-    gdt[2].code = 0;
-    gdt[2].code_data_segment = 1;
-    gdt[2].DPL = 0;
-    gdt[2].present = 1;
-    gdt[2].limit_high = 0xF;
-    gdt[2].available = 0;
-    gdt[2].long_mode = 0;
-    gdt[2].big = 1;
-    gdt[2].granularity = 1;
-    gdt[2].base_high = 0;
+    gdt_set_entry(&gdt[2], 0, 0xFFFFF, 0x92, 0xC0);
+    
 
-    ring3_code->limit_low = 0xFFFF;
-    ring3_code->base_low = 0;
-    ring3_code->accessed = 0;
-    ring3_code->read_write = 1;
-    ring3_code->conforming_expand_down = 0;
-    ring3_code->code = 1;
-    ring3_code->code_data_segment = 1;
-    ring3_code->DPL = 3;
-    ring3_code->present = 1;
-    ring3_code->limit_high = 0xF;
-    ring3_code->available = 1;
-    ring3_code->long_mode = 1;  
-    ring3_code->big = 0;
-    ring3_code->granularity = 1;
-    ring3_code->base_high = 0;
-
-    *ring3_data = *ring3_code;
-    ring3_data->code = 0;
-    ring3_data->long_mode = 0;
-    ring3_data->big = 1;
+    // User code segment (ring 3)
+    gdt_set_entry(ring3_code, 0, 0xFFFFF, 0xFA, 0xA0);
+    
+    // User data segment (ring 3)
+    gdt_set_entry(ring3_data, 0, 0xFFFFF, 0xF2, 0xC0);
 
     write_tss(&gdt[5]);
 
