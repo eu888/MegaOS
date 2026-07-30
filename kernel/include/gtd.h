@@ -25,7 +25,7 @@ extern gdt_entry_bits_t* ring3_code;
 extern gdt_entry_bits_t* ring3_data;
 
 extern void load_gdt(gdt_ptr_t* ptr);
-extern void jump_usermode(uintptr_t stack_top);
+extern void jump_usermode(uintptr_t user_entry, uintptr_t stack_top);
 
 void gdt_set_entry(gdt_entry_bits_t *entry, uint32_t base, uint32_t limit, uint8_t access, uint8_t flags);
 void init_gdt(void);

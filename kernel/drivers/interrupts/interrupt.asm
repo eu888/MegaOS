@@ -67,12 +67,23 @@ keyboard_stub:
     push r14
     push r15
 
+    mov ax, ds
+    push rax
+
     mov rbx, rsp
     and rsp, -16
+
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
 
     call keyboard_interrupt_handler
 
     mov rsp, rbx
+
+    pop rax
+    mov ds, ax
+    mov es, ax
 
     pop r15
     pop r14

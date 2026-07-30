@@ -11,10 +11,11 @@ jump_usermode:
     mov gs, ax
 
     push 0x23                ; SS
-    push rdi                 ; RSP
+    push rsi                 ; RSP
     push 0x202               ; RFLAGS
     push 0x1B                ; CS
+    push rdi
 
-    jmp $
+    ; jmp $
 
     iretq
