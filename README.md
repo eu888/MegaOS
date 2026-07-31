@@ -1,10 +1,14 @@
-# MegaOS Overview
+<div align="center">
+
+# MegaOS 
+
+**MegaOS is an bare-metal x86 64 bit kernel.**
 
 [![Build Docker Image and compile binaries CI](https://github.com/eu888/MegaOS/actions/workflows/docker-image.yml/badge.svg)](https://github.com/eu888/MegaOS/actions/workflows/docker-image.yml)
 
 [![CodeQL Advanced](https://github.com/eu888/MegaOS/actions/workflows/codeql.yml/badge.svg)](https://github.com/eu888/MegaOS/actions/workflows/codeql.yml)
-
-MegaOS is an bare-metal x86 64 bit kernel.
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](License)
+</div>
 
 ## Features
 
