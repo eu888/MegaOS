@@ -71,12 +71,12 @@ void console_process_key(char key){
  * @param command The line which the command and it`s params are.
  */
 void console_command_handler(const char* command){
-    if(strncmp(command, "echo", 3) == 0){
+    if(strncmp(command, "echo", 4) == 0){
         terminal_write_string(command+5);
         terminal_put_char('\n');
     } else if(strcmp(command, "clear") == 0){
         console_clear();
-    } else if(strncmp(command, "color", 4) == 0){
+    } else if(strncmp(command, "color", 5) == 0){
         if(command_length <= 5){
             set_color_info();
             return;
